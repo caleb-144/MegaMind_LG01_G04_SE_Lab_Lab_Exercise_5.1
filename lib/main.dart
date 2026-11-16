@@ -8,6 +8,8 @@ import 'programme_page.dart';
 import 'about_page.dart';
 import 'providers/share_state_management.dart';
 
+import 'bottom_navigation.dart';
+
 void main() {
   runApp(
     ChangeNotifierProvider(
@@ -27,9 +29,7 @@ class StudentHubApp extends StatelessWidget {
       title: 'StudentHub',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         scaffoldBackgroundColor: const Color(0xFFF5F6FA),
       ),
       home: const MainNavigationPage(),
@@ -80,18 +80,12 @@ class MainNavigationPage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.indigo,
-              ),
+              decoration: BoxDecoration(color: Colors.indigo),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(
-                    Icons.school,
-                    color: Colors.white,
-                    size: 45,
-                  ),
+                  Icon(Icons.school, color: Colors.white, size: 45),
                   SizedBox(height: 10),
                   Text(
                     'StudentHub',
@@ -103,9 +97,7 @@ class MainNavigationPage extends StatelessWidget {
                   ),
                   Text(
                     'Student Management System',
-                    style: TextStyle(
-                      color: Colors.white70,
-                    ),
+                    style: TextStyle(color: Colors.white70),
                   ),
                 ],
               ),
@@ -162,44 +154,14 @@ class MainNavigationPage extends StatelessWidget {
       ),
 
       // Main Pages
-      body: IndexedStack(
-        index: currentIndex,
-        children: pages,
-      ),
+      body: IndexedStack(index: currentIndex, children: pages),
 
       // Bottom Navigation
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
+      bottomNavigationBar: StudentBottomNavigation(
+        currentIndex: currentIndex,
         onDestinationSelected: (index) {
           navigation.setIndex(index);
         },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.people_outline),
-            selectedIcon: Icon(Icons.people),
-            label: 'Students',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.table_chart_outlined),
-            selectedIcon: Icon(Icons.table_chart),
-            label: 'Records',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.school_outlined),
-            selectedIcon: Icon(Icons.school),
-            label: 'Programmes',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.info_outline),
-            selectedIcon: Icon(Icons.info),
-            label: 'About',
-          ),
-        ],
       ),
     );
   }
